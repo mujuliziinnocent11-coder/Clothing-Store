@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THREAD & TONE | Fashion Store</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #faf9f6;
+  color: #222;
+}
+
+header {
+  background: #171717;
+  color: white;
+  padding: 22px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.hero {
+  min-height: 420px;
+  background: linear-gradient(90deg,#000b,#0002),
+  url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1500') center/cover;
+  color: white;
+  padding: 100px 8%;
+}
+
+.hero h1 {
+  font-size: clamp(38px,6vw,65px);
+  margin-bottom: 18px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  display: inline-block;
+  background: #c49a6c;
+  color: #171717;
+  padding: 13px 23px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+section {
+  padding: 55px 7%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.filters button {
+  padding: 10px 18px;
+  border: 1px solid #222;
+  background: white;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.filters button.active {
+  background: #171717;
+  color: white;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 25px;
+}
+
+.product {
+  background: white;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px #0001;
+}
+
+.product img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 18px;
+}
+
+.product-info h3 {
+  margin-bottom: 10px;
+}
+
+.price {
+  font-weight: bold;
+  color: #9b6736;
+  margin: 12px 0;
+  font-size: 19px;
+}
+
+.product button {
+  width: 100%;
+  padding: 12px;
+  background: #171717;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cart {
+  background: #eee9e2;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.cart h3 {
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.remove {
+  color: #a22;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.total {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.contact {
+  text-align: center;
+  background: #171717;
+  color: white;
+}
+
+.contact p {
+  margin: 15px 0 25px;
+}
+
+footer {
+  text-align: center;
+  padding: 22px;
+  background: #111;
+  color: white;
+}
+
+@media(max-width:600px) {
+  header {
+    justify-content: center;
+  }
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero {
+    padding: 75px 7%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">THREAD & TONE</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#cart">Cart</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a href="#cart" class="btn">
+    Cart (<span id="cart-count">0</span>)
+  </a>
+</header>
+
+<div class="hero" id="home">
+  <h1>Dress With Confidence.</h1>
+  <p>Discover your style. Wear your confidence.</p>
+  <a href="#shop" class="btn">SHOP NOW</a>
+</div>
+
+<section id="shop">
+  <h2 class="section-title">OUR COLLECTION</h2>
+
+  <div class="filters">
+    <button class="active" onclick="filterProducts('All',this)">All</button>
+    <button onclick="filterProducts('Men',this)">Men</button>
+    <button onclick="filterProducts('Women',this)">Women</button>
+    <button onclick="filterProducts('Accessories',this)">Accessories</button>
+  </div>
+
+  <div class="products">
+
+    <div class="product" data-category="Men">
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600" alt="T-shirt">
+      <div class="product-info">
+        <h3>Classic T-Shirt</h3>
+        <p>Comfortable everyday fashion.</p>
+        <div class="price">UGX 35,000</div>
+        <button onclick="addToCart('Classic T-Shirt',35000)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Women">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600" alt="Dress">
+      <div class="product-info">
+        <h3>Elegant Dress</h3>
+        <p>Look beautiful on every occasion.</p>
+        <div class="price">UGX 85,000</div>
+        <button onclick="addToCart('Elegant Dress',85000)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Men">
+      <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600" alt="Shirt">
+      <div class="product-info">
+        <h3>Casual Shirt</h3>
+        <p>Smart style for everyday wear.</p>
+        <div class="price">UGX 55,000</div>
+        <button onclick="addToCart('Casual Shirt',55000)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Women">
+      <img src="https://images.unsplash.com/photo-1548624149-fb5c7f8e9d2e?w=600" alt="Fashion outfit">
+      <div class="product-info">
+        <h3>Fashion Outfit</h3>
+        <p>Beautiful modern fashion.</p>
+        <div class="price">UGX 70,000</div>
+        <button onclick="addToCart('Fashion Outfit',70000)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Accessories">
+      <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600" alt="Handbag">
+      <div class="product-info">
+        <h3>Stylish Handbag</h3>
+        <p>Complete your look.</p>
+        <div class="price">UGX 65,000</div>
+        <button onclick="addToCart('Stylish Handbag',65000)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-category="Accessories">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt="Watch">
+      <div class="product-info">
+        <h3>Classic Watch</h3>
+        <p>Simple, elegant accessories.</p>
+        <div class="price">UGX 45,000</div>
+        <button onclick="addToCart('Classic Watch',45000)">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="cart">
+  <h2 class="section-title">YOUR SHOPPING CART</h2>
+  <div class="cart">
+    <h3>Selected Items</h3>
+    <div id="cart-items">Your cart is empty.</div>
+    <div class="total" id="total">Total: UGX 0</div>
+    <button class="btn" onclick="checkout()">ORDER ON WHATSAPP</button>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>GET IN TOUCH</h2>
+  <p>Need help choosing your outfit? Contact us today.</p>
+  <a class="btn" href="https://wa.me/256700000000" target="_blank">
+    CHAT WITH US
+  </a>
+</section>
+
+<footer>
+  <p>© 2026 THREAD & TONE. All Rights Reserved.</p>
+  <p>Fashion is an expression of who you are.</p>
+</footer>
+
+<script>
+let cart = [];
+
+function formatPrice(price) {
+  return 'UGX ' + price.toLocaleString('en-US');
+}
+
+function addToCart(name, price) {
+  cart.push({name,price});
+  updateCart();
+  alert(name + ' added to your cart!');
+}
+
+function removeItem(index) {
+  cart.splice(index,1);
+  updateCart();
+}
+
+function updateCart() {
+  const items = document.getElementById('cart-items');
+  document.getElementById('cart-count').textContent = cart.length;
+
+  if (cart.length === 0) {
+    items.textContent = 'Your cart is empty.';
+  } else {
+    items.innerHTML = cart.map((item,index) => `
+      <div class="cart-item">
+        <span>${item.name} - ${formatPrice(item.price)}</span>
+        <button class="remove" onclick="removeItem(${index})">Remove</button>
+      </div>
+    `).join('');
+  }
+
+  const sum = cart.reduce((acc,item) => acc + item.price,0);
+  document.getElementById('total').textContent =
+    'Total: ' + formatPrice(sum);
+}
+
+function filterProducts(category,button) {
+  document.querySelectorAll('.filters button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  button.classList.add('active');
+
+  document.querySelectorAll('.product').forEach(product => {
+    product.style.display =
+      category === 'All' || product.dataset.category === category
+      ? 'block' : 'none';
+  });
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert('Please add products to your cart first.');
+    return;
+  }
+
+  const phone = '256700000000';
+  let message = 'Hello! I would like to order:\n\n';
+
+  cart.forEach(item => {
+    message += item.name + ' - ' + formatPrice(item.price) + '\n';
+  });
+
+  const total = cart.reduce((sum,item) => sum + item.price,0);
+  message += '\nTotal: ' + formatPrice(total);
+  message += '\n\nPlease assist me with my order.';
+
+  window.open(
+    'https://wa.me/' + phone + '?text=' + encodeURIComponent(message),
+    '_blank'
+  );
+}
+</script>
+
+</body>
+</html>
